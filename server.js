@@ -1,9 +1,10 @@
 var express = require("express");
+var bodyParser = require("body-parser");
 var app = express();
 
 var PORT = 3000;
 
-app.use(bodyParser.json()); //always copy and paste these four lines  | tells express to use bodyParser
+app.use(bodyParser.json()); //always copy and paste these four lines  | tells express to use bodyParser | allows you to get data
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
@@ -29,7 +30,13 @@ app.get('/students/:studentId', function(req, res) {
 });
 
 app.post('/add', function(req, res){
-
+    console.log(req.body);
+    if (req.body.name) {
+        roster.push(req.body);
+        res.send('student added new');
+    } else {
+        response.send('womp');
+    }
 })
 
 app.listen(PORT, function () {
